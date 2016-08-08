@@ -1,0 +1,21 @@
+{
+    "name": "kaliber5/logger-bundle",
+    "description": "Supports advanced logging",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Andreas Schacht",
+            "email": "schacht@kaliber5.de"
+        },
+        {
+            "name": "Simon Ihmig",
+            "email": "ihmig@kaliber5.de"
+        }
+    ],
+    "require": {
+        "symfony/symfony": "^2.7.0"
+    },
+    "autoload": {
+        "psr-4": { "Kaliber5\\LoggerBundle\\": "" }
+    }
+}
