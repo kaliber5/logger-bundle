@@ -128,12 +128,17 @@ trait LoggingTrait
      */
     protected function logMessage($method, $message, \Exception $exception = null)
     {
-        if ($this->logger && method_exists($this->logger, $method)) {
-            $this->logger->$method('{'.get_class($this).'} '.$message);
-            if ($exception) {
-                $this->logMessage($method, $exception->getMessage());
-                $this->logMessage($method, $exception->getTraceAsString());
+        try {
+            if ($this->logger && method_exists($this->logger, $method)) {
+                $this->logger->$method('{'.get_class($this).'} '.$message);
+                if ($exception) {
+                    $this->logMessage($method, $exception->getMessage());
+                    $this->logMessage($method, $exception->getTraceAsString());
+                }
             }
+        } catch (\Exception $e) {
+            // Failures on logging should never break the process
+            // so catch all exceptions and continue
         }
     }
 }
