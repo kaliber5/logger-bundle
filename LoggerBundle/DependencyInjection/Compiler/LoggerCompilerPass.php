@@ -27,11 +27,31 @@ class LoggerCompilerPass implements CompilerPassInterface
         );
 
         foreach ($taggedServices as $id => $tags) {
+            $reference = 'logger';
+            if (($channel = $this->getChannel($tags)) !== null) {
+                $reference = 'monolog.logger.'.$channel;
+            }
             $container->getDefinition($id)->addMethodCall(
                 'setLogger',
-                array(new Reference('logger'))
+                array(new Reference($reference))
             );
         }
 
+    }
+
+    /**
+     * returns the channel attribute if exists
+     *
+     * @param array $tags
+     *
+     * @return string|null
+     */
+    protected function getChannel(array $tags)
+    {
+        foreach ($tags as $tag) {
+            if (isset($tag['channel'])) {
+                return $tag['channel'];
+            }
+        }
     }
 }

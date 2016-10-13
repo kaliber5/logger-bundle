@@ -58,4 +58,21 @@ services:
             - { name: k5.logger.logging }
 
 
-Then in your class you can use methods like ``$this->logDebug($message)`` to simplify logging.
+Then in your class you can use methods like ``$this->logDebug($message)`` or ``$this->logError($message, $exception)`` to simplify logging.
+
+You can use a different channel:
+
+.. code-block:: yml
+# ..
+services:
+    your-service:
+    # ..
+        tags:
+            - { name: k5.logger.logging, channel: security }
+
+To register custom channels, add to your monolog configuration:
+
+.. code-block:: yml
+# ..
+monolog:
+    channels: ['mycustomchannel']
