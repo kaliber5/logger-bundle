@@ -48,6 +48,7 @@ Step 2: Use the Logger
 
 Your Service can use the ``Kaliber5\LoggerBundle\LogginTrait\Loggintrait`` - Trait. In
 your service-definition you can tag your service with the ``k5.logger.logging`` to get the logger injected
+You can optional log to a channel by using the ``monolog.logger``-tag.
 
 .. code-block:: yml
 # ..
@@ -56,6 +57,7 @@ services:
     # ..
         tags:
             - { name: k5.logger.logging }
+            - { name: 'monolog.logger', channel: 'my-channel' } # optional, to log in a given channel
 
 
 Then in your class you can use methods like ``$this->logDebug($message)`` to simplify logging.
