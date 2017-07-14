@@ -130,10 +130,10 @@ trait LoggingTrait
     {
         try {
             if ($this->logger && method_exists($this->logger, $method)) {
-                $this->logger->$method('{'.get_class($this).'} '.$message);
                 if ($exception) {
-                    $this->logMessage($method, $exception->getMessage());
-                    $this->logMessage($method, $exception->getTraceAsString());
+                    $this->logMessage($method, $message.PHP_EOL.$exception->getMessage().PHP_EOL.$exception->getTraceAsString());
+                } else {
+                    $this->logger->$method('{'.get_class($this).'} '.$message);
                 }
             }
         } catch (\Exception $e) {
