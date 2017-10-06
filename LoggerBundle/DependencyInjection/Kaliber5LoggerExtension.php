@@ -2,6 +2,7 @@
 
 namespace Kaliber5\LoggerBundle\DependencyInjection;
 
+use Kaliber5\LoggerBundle\LoggingInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
@@ -18,6 +19,8 @@ class Kaliber5LoggerExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $container->registerForAutoconfiguration(LoggingInterface::class)
+            ->addTag('k5.logger.logging');
         $configuration = new Configuration();
         $this->processConfiguration($configuration, $configs);
     }

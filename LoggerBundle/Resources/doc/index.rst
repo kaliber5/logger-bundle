@@ -45,9 +45,11 @@ in the ``app/AppKernel.php`` file of your project:
 
 Step 2: Use the Logger
 ----------------------
+If you enabled autoconfigure, your service just need to implement the ``Kaliber5\LoggerBundle\LoggingInterface`` and
+your service gets the logger injected. Then your Service can use the ``Kaliber5\LoggerBundle\LoggingTrait\LoggingTrait`` - Trait, it provides
+methods like ``$this->logDebug($message)`` or ``$this->logDebug($message, $exception)`` to simplify logging.
 
-Your Service can use the ``Kaliber5\LoggerBundle\LogginTrait\Loggintrait`` - Trait. In
-your service-definition you can tag your service with the ``k5.logger.logging`` to get the logger injected
+If you need more advanced configuration,  you can tag your service with the ``k5.logger.logging`` to get the logger injected
 You can optional log to a channel by using the ``monolog.logger``-tag.
 
 .. code-block:: yml
@@ -60,4 +62,3 @@ services:
             - { name: 'monolog.logger', channel: 'my-channel' } # optional, to log in a given channel
 
 
-Then in your class you can use methods like ``$this->logDebug($message)`` to simplify logging.
